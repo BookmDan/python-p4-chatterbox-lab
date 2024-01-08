@@ -20,7 +20,7 @@ db.init_app(app)
 def messages():
     if request.method =='GET':
         messages = Message.query.order_by('created_at').all()
-        # flask does jsonify for us? 
+        # flask doesn't serialize, so we do need it in object form
         response = [ message.to_dict() for message in messages] 
         # response = make_response(
         #     jsonify([ message.to_dict() for message in messages]) #map from each message in messages to object 
