@@ -68,7 +68,7 @@ def messages_by_id(id):
     elif request.method == 'DELETE':
         db.session.delete(message)
         db.session.commit()
-        response = make_response()
+        response = jsonify({'message': f'deleted message {id}'})
     return response
 
     # return f'this is where we get message by id info {id}'
