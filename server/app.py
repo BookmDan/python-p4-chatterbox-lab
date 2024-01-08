@@ -18,7 +18,17 @@ db.init_app(app)
 
 @app.route('/messages') #, methods =['GET']
 def messages():
-    return 'this is where messages will go'
+    if request.method =='GET':
+        messages = Message.query.order_by('created_at').all()
+        response = make_response(
+            jsonify([ message.to_dict() for message in messages]) #map from each message in messages to object 
+            # js messages.map(message => message.to_dict())
+        )
+        # return 'this is where messages will go'
+    elif request.method == 'POST':
+        
+        return 'something else'
+    return response
     # messages = Message.query.all()
     # serialized_messages=[]
     # for message in messages:
@@ -34,6 +44,7 @@ def messages():
 
 @app.route('/messages/<int:id>', methods =['GET'])
 def messages_by_id(id):
+    return f'this is where we get message by id info {id}'
     message = Message.query.get_or_404(id)
 
     serialized_message ={
@@ -45,4 +56,4 @@ def messages_by_id(id):
     return jsonify(serialized_message)
 
 if __name__ == '__main__':
-    app.run(port=5555)
+    app.run(port=4000)
