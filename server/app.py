@@ -20,10 +20,12 @@ db.init_app(app)
 def messages():
     if request.method =='GET':
         messages = Message.query.order_by('created_at').all()
-        response = make_response(
-            jsonify([ message.to_dict() for message in messages]) #map from each message in messages to object 
-            # js messages.map(message => message.to_dict())
-        )
+        # flask does jsonify for us? 
+        response = [ message.to_dict() for message in messages] 
+        # response = make_response(
+        #     jsonify([ message.to_dict() for message in messages]) #map from each message in messages to object 
+        #     # js messages.map(message => message.to_dict())
+        # )
         # return 'this is where messages will go'
     elif request.method == 'POST':
         data = request.get_json()
