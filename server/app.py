@@ -16,19 +16,21 @@ migrate = Migrate(app, db)
 
 db.init_app(app)
 
-@app.route('/messages', methods =['GET'])
+@app.route('/messages') #, methods =['GET']
 def messages():
-    messages = Message.query.all()
-    serialized_messages=[]
-    for message in messages:
-        serialized_messages = {
-            'id': message.id,
-            'body': message.body,
-            'username': message.username,
-            'created_at': message.created_at.strftime('%Y-%m-%dT%H:%M:%S'),
-        }
-        serialized_messages.append(serialized_messages)
-    return jsonify(serialized_messages)
+    return 'this is where messages will go'
+    # messages = Message.query.all()
+    # serialized_messages=[]
+    # for message in messages:
+    #     serialized_messages = {
+    #         'id': message.id,
+    #         'body': message.body,
+    #         'username': message.username,
+    #         'created_at': message.created_at.strftime('%Y-%m-%dT%H:%M:%S'),
+    #     }
+    #     serialized_messages.append(serialized_messages)
+    # return jsonify(serialized_messages)
+    
 
 @app.route('/messages/<int:id>', methods =['GET'])
 def messages_by_id(id):
